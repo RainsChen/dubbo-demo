@@ -250,7 +250,7 @@
                     <archive>
                         <addMavenDescriptor>false</addMavenDescriptor>
                     </archive>
-                    <warName>dubbo-provider</warName>
+                    <warName>dubbo-consumer</warName>
                     <webResources>
                         <resource>
                             <directory>src/main/resources/${package.environment}</directory>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+        http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+    <!-- 接入dubbo的应用程序名称 -->
+    <dubbo:application name="dubbo-demo" owner="demo" organization="dubbox"/>
+
+    <!-- 注册中心地址 -->
+
+    <!--<dubbo:registry address="zookeeper://192.168.1.220:2181"  protocol="zookeeper"/>-->
+    <dubbo:registry address="zookeeper://127.0.0.1:2181"  protocol="zookeeper"/>
+
+    <!-- 用dubbo协议在20880端口暴露服务 -->
+    <dubbo:protocol name="dubbo" port="20880"/>
+
+    <!-- 使用AUTH2.0的令牌过滤器，若APP未持有合法令牌，所有请求都将被拦截-->
+    <!--<dubbo:provider filter="OAuthFilter"/>-->
+
+    <!--  用rest协议在8080端口暴露服务 use tomcat server -->
+    <dubbo:protocol name="rest" port="8080" threads="500" server="servlet" accepts="500"  keepalive="false"
+                    extension="com.alibaba.dubbo.rpc.protocol.rest.support.LoggingFilter"/>
+
+    <!--
+        声明需要暴露的服务接口，
+        请注意ref属性中指定的MyService接口实现类，它并没有在xml文件中定义，而是使用注解的方式在class中定义
+     -->
+    <!--<dubbo:service interface="ec.api.AccountApi" ref="accountRestApi" protocol="rest"  validation="true" />-->
+    <!--<dubbo:service interface="ec.api.AccountApi" ref="accountApi"  protocol="dubbo"/>-->
+
+</beans>
